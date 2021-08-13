@@ -169,19 +169,20 @@ console.log("FIND BY ID", findById(movies,"tt1979376"))
 function filterByGenre(movies, genre) {
   //if movies array is empty return empty array
   let genreArray = [];
+  let searchFor = genre.toLowerCase();
+
   if(!movies.length){ 
     return genreArray;
   }
 
   for(let movie of movies){
+    let compare = movie.genre.toLowerCase()
 
-    let compareArray = movie.genre.toLowerCase().split(", ")
- 
-    if(compareArray.includes(genre.toLowerCase)){
-      genreArray.push(movie.title);
-      return genreArray
+    if(compare.includes(searchFor)){
+      genreArray.push(movie)
     }
   }
+  return genreArray
 }
 
 /**
