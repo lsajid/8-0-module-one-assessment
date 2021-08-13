@@ -167,16 +167,19 @@ console.log("FIND BY ID", findById(movies,"tt1979376"))
  *  //> []
  */
 function filterByGenre(movies, genre) {
-  //declare empty array
-  let genreArray = [];
   //if movies array is empty return empty array
+  let genreArray = [];
   if(!movies.length){ 
     return genreArray;
   }
 
   for(let movie of movies){
-    if(movie.genre.includes(genre.toLowerCase)){
-      
+
+    let compareArray = movie.genre.toLowerCase().split(", ")
+ 
+    if(compareArray.includes(genre.toLowerCase)){
+      genreArray.push(movie.title);
+      return genreArray
     }
   }
 }
@@ -204,14 +207,16 @@ function filterByGenre(movies, genre) {
     ];
  */
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+
   let yearRange = [];
 
   for(let movie of movies){
-    
-    let movieString = movie.released;
-    movieString.trim()
-    console.log(movieString)
+    let movieYear = movie.released.split(" ").slice(2);
+    if(movieYear <= year){
+      yearRange.push(movie);
+    }
   }
+  return yearRange
 }
 console.log(getAllMoviesReleasedAtOrBeforeYear(movies, 2000))
 /**
@@ -225,7 +230,24 @@ console.log(getAllMoviesReleasedAtOrBeforeYear(movies, 2000))
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(movies) {
+  if(!movies.length){
+    return null;
+  }
+
+  let finalAns
+  let highestCount = 0;
+  
+
+  for(let movie of movies){
+    let boxOfficePrice = +movie.boxOffice.slice(1).split(",").join("")
+    if(boxOfficePrice > highestCount){
+      highestCount = boxOfficePrice;
+      finalAns = movie.title;
+    }
+  }
+  return finalAns;
+}
 
 // Do not change anything below this line.
 module.exports = {
