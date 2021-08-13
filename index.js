@@ -3,6 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -107,14 +108,14 @@ function countByRating(movies) {
     ratingsObj;
   }
 
-  for(movie of movies){
+  for(let movie of movies){
     if(!ratingsObj[movie.rated]){
       ratingsObj[movie.rated] = 1;
     } else {
       ratingsObj[movie.rated] += 1;
     }
   }
-  return ratingsObj
+  return ratingsObj;
 }
 
 /**
@@ -131,8 +132,20 @@ function countByRating(movies) {
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
 
+  if(!movies.length){ 
+    return null;
+  }
+
+  for(let movie of movies){
+    if (movie.imdbID === id){
+        return movie;
+  }
+}
+return null;
+}
+console.log("FIND BY ID", findById(movies,"tt1979376"))
 /**
  * filterByGenre()
  * -----------------------------
@@ -153,7 +166,20 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  //declare empty array
+  let genreArray = [];
+  //if movies array is empty return empty array
+  if(!movies.length){ 
+    return genreArray;
+  }
+
+  for(let movie of movies){
+    if(movie.genre.includes(genre)){
+      
+    }
+  }
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
